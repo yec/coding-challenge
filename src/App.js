@@ -1,25 +1,39 @@
 import React from 'react';
 import logo from './logo.svg';
+
+import 'react-router';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import Tile from './components/Tile';
+import Section from './components/Section';
+import Container from './components/Container';
+import SubHeader from './components/SubHeader';
+import Main from './components/Main';
+
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Main>
+      <SubHeader>
+        <Container >
+          Popular titles
+        </Container>
+      </SubHeader>
+      <Section>
+        <Container medium>
+          {[{
+            titleCompact: "Series",
+            title: "Popular Series",
+            url: "popular-series",
+          }, {
+            titleCompact: "Movies",
+            title: "Popular Movies",
+            url: "popular-movies",
+          }].map(({ titleCompact, title, url }) => <Tile url={url} key={title}>{titleCompact} {title}</Tile>)}
+        </Container>
+      </Section>
+    </Main>
   );
 }
 
