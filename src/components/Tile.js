@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
@@ -36,10 +37,19 @@ function Tile({ title = "", titleCompact, url = "", children = "", images, ...pr
   }
 
   return <Card key={title} to={url}>
-    <ImgLoader alt={title} imageUrl={images && images['Poster Art'].url}>{children}</ImgLoader>
+    <ImgLoader alt={title} imageUrl={images && images['Poster Art'] && images['Poster Art'].url}>{children}</ImgLoader>
     <Text cardTitle>{title}</Text>
   </Card>
 }
+
+Tile.propTypes = {
+  title: PropTypes.string.isRequired,
+  images: PropTypes.shape({
+    'Poster Art': PropTypes.shape({
+      url: PropTypes.string.isRequired
+    })
+  })
+};
 
 const Card = styled(Link)`
 
@@ -52,10 +62,13 @@ margin: 5px;
   width: 134px;
   margin: 10px;
 }
-&:hover {
-  transform: scale(1.05);
+
+@media (min-width: 920px) {
+  &:hover {
+    transform: scale(1.05);
+  }
+  transition: transform 0.2s;
 }
-transition: transform 0.2s;
 `
 
 const ImgLoader = ({ alt="", imageUrl, children }) => {
