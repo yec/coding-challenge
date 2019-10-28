@@ -15,4 +15,35 @@ a:active {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  animation: fadeInDownFromNone 0.5s ease-out;
+}
+
+.loading {
+  opacity: 0;
+}
+
+.loaded {
+  animation: fadeInFromNone 0.5s ease-out;
+}
+
+@keyframes fadeInFromNone {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+@keyframes fadeInDownFromNone {
+  0% {
+      opacity: 0;
+      transform: translateY(-10px);
+  }
+
+  100% {
+      opacity: 1;
+      transform: translateY(0);
+  }
 }

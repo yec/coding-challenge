@@ -8,6 +8,7 @@ function Tiles ({ className, children}) {
 }
 
 const TilesStyled = styled(Tiles)`
+
 display: flex;
 flex-flow: row wrap;
 

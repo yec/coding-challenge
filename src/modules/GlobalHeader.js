@@ -12,9 +12,12 @@ export default function GlobalHeader() {
     <Container>
       <Level mobile>
       <Link to="/">DEMO Streaming</Link>
-      <div style={{display: 'flex'}}>
-      <Button transparent>Log in</Button>
-      <Button secondary>Start your free trial</Button>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center'
+        }}>
+        <Button transparent>Log in</Button>
+        <Button secondary>Start your free trial</Button>
       </div>
       </Level>
     </Container>

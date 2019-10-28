@@ -2,7 +2,6 @@ import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
-import TilesStyled from './Tiles';
 
 const Text = styled.div`
   display: flex;
@@ -34,65 +33,39 @@ const Text = styled.div`
  * Lazy load image implementation. add elements to an array and prevent image loading
  * as they become visible allow the image to load
  */
-const tileRefs = [];
+const imgLoaderRefs = {};
 
-// function checkVisible() {
-//   var visible = window.innerHeight + window.scrollY;
-//   tileRefs.forEach(ref => {
-//     if (ref.current.getBoundingClientRect().top < visible) {
-//       // make visible
-//       if (!ref.current.loaded) {
-//         ref.current.setLoaded(true);
-//       }
-//     }
-//   });
-//   requestAnimationFrame(checkVisible);
-// }
+function checkVisible() {
+  Object.values(imgLoaderRefs).forEach(ref => {
+    if (
+      ref.current.getBoundingClientRect().top < window.innerHeight
+      && ref.current.getBoundingClientRect().top > 0
+    ) {
+      // setting src triggers img element to start loading
+      if (!ref.current.imgRef.current.src) {
+        ref.current.imgRef.current.src = ref.current.imageUrl;
+      }
+    }
+  });
+  requestAnimationFrame(checkVisible);
+}
 
-// requestAnimationFrame(checkVisible);
+requestAnimationFrame(checkVisible);
 
 function Tile({ title = "", titleCompact, url = "", children = "", images, ...props }) {
 
-  const element = useRef();
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(function updateRefs() {
-    if (tileRefs.indexOf(element) < 0) {
-      element.current.setLoaded = setLoaded;
-      element.current.loaded = loaded;
-      tileRefs.push(element);
-    }
-
-    // cleanup
-    return () => {
-      // remove the tile
-      if (tileRefs.indexOf(element) >= 0) {
-        tileRefs.splice(tileRefs.indexOf(element), 1);
-      }
-    };
-  });
-
   // set title if no images
-
   if (!images) {
     children = <Text large centered white>{titleCompact}</Text>
   }
 
-
-  return <Card ref={element} imageUrl={loaded && images && images['Poster Art'].url} key={title} to={url}>
-    <Image>{children}</Image>
+  return <Card key={title} to={url}>
+    <ImgLoader imageUrl={images && images['Poster Art'].url}>{children}</ImgLoader>
     <Text cardTitle>{title}</Text>
   </Card>
 }
 
 const Card = styled(Link)`
-
-&:link > *,
-&:hover > *,
-&:visited > *,
-&:active > * {
-  color: initial;
-}
 
 display: flex;
 flex-direction: column;
@@ -107,27 +80,54 @@ margin: 5px;
 }
 `
 
-const Image = styled.div`
+const ImgLoader = ({ imageUrl, children }) => {
+  const imgLoaderRef = useRef();
+  const imgRef = useRef();
 
+  useEffect(function updateRefs() {
+    if (imageUrl) {
+      imgRef.current.classList.add("loading");
+
+      imgRef.current.onload = function () {
+        if (imgRef.current) {
+          imgRef.current.classList.remove("loading");
+          imgRef.current.classList.add("loaded");
+        }
+      };
+
+      if (!imgLoaderRefs[imageUrl]) {
+        imgLoaderRef.current.imageUrl = imageUrl;
+        imgLoaderRef.current.imgRef = imgRef;
+        imgLoaderRefs[imageUrl] = imgLoaderRef;
+      }
+    }
+
+    // cleanup
+    return () => {
+      // remove the tile
+      delete imgLoaderRefs[imageUrl];
+    };
+  },
+    // only run useeffect imageUrl change
+    [imageUrl]);
+
+  if (imageUrl) {
+    children = <img style={{ width: '100%', height: '100%' }} ref={imgRef} />;
+  }
+  return <Img ref={imgLoaderRef} size='200%' imageUrl="assets/placeholder.png">{children}</Img>
+}
+
+const Img = styled.div`
+animation: fadeInFromNone 0.5s ease-out;
 display: flex;
-background-color: rgba(0,0,0,0.8);
+background: rgba(0,0,0,0.9);
 width: 67px;
 height: 100px;
-${({ imageUrl }) => {
-    return imageUrl
-      ? `
-  background-image: url(assets/placeholder.png), url(${imageUrl});
-  background-size: contain, cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`
-      : `
-  background-image: url(assets/placeholder.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-`
-  }}
+
+background-image: url(${props => props.imageUrl});
+background-size: ${props => props.size};
+background-repeat: no-repeat;
+background-position: center;
 
 @media (min-width: 769px) {
   width: 134px;
@@ -136,15 +136,3 @@ ${({ imageUrl }) => {
 `;
 
 export default Tile;
-
-// "title": "Wolf Creek",
-// "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-// "programType": "series",
-// "images": {
-//   "Poster Art": {
-//     "url": "https://streamcoimg-a.akamaihd.net/000/128/61/12861-PosterArt-ec32a81986a45eac7e080112075ab466.jpg",
-//     "width": 1000,
-//     "height": 1500
-//   }
-// },
-// "releaseYear": 2016

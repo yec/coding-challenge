@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -11,7 +10,7 @@ const Container = styled.div`
 
     @media (min-width: 769px) {
 
-      max-width: 924px;
+      max-width: 904px;
 
       ${props => props.medium && `
         margin-top: 40px;

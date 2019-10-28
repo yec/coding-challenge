@@ -19,5 +19,5 @@ export default function Social () {
     'assets/store/play-store.svg',
     'assets/store/windows-store.svg',
   ]
-  return <SocialContainer>{socials.map(src => <SocialImg height="30px" src={src} />)}</SocialContainer>;
+  return <SocialContainer>{socials.map(src => <SocialImg key={src} height="36px" src={src} />)}</SocialContainer>;
 }

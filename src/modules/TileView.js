@@ -8,7 +8,7 @@ import Text from '../components/Text';
 function Data({ selector, source, component }) {
   const serverResponse = useFetch(source, { method: 'GET' });
   const entries = selector(serverResponse);
-  return entries.map(entry => <Tile key={entry.title} {...entry}></Tile>);
+  return entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>);
 }
 
 export default function TileView({ items = [], ...props }) {

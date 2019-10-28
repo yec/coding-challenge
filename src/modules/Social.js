@@ -19,5 +19,5 @@ export default function Social () {
     'assets/social/twitter-white.svg',
     'assets/social/instagram-white.svg',
   ]
-  return <SocialContainer>{socials.map(src => <SocialImg width="30px" height="30px" src={src} />)}</SocialContainer>;
+  return <SocialContainer>{socials.map(src => <SocialImg key={src} width="30px" height="30px" src={src} />)}</SocialContainer>;
 }

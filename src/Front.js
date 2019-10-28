@@ -41,7 +41,7 @@ export default function Front() {
             <TileView source="feed/sample.json" selector={moviesSelector} />
           </Page>
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Page title="Popular Titles">
             <TileView items={[{
               titleCompact: "Series",
@@ -53,6 +53,20 @@ export default function Front() {
               url: "popular-movies",
             }]} />
           </Page>
+        </Route>
+        <Route component={props => (
+          <Page title={`Page not found ${props.location.pathname}`}>
+            <TileView items={[{
+              titleCompact: "Series",
+              title: "Popular Series",
+              url: "popular-series",
+            }, {
+              titleCompact: "Movies",
+              title: "Popular Movies",
+              url: "popular-movies",
+            }]} />
+          </Page>
+        )}>
         </Route>
       </Switch>
       <GlobalFooter />

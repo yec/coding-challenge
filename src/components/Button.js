@@ -1,10 +1,17 @@
-import React from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
   color: white;
-  font-weight: bold;
+  // font-weight: bold;
+  font-size: 16px
   border: none;
+
+  padding-right: 15px;
+  padding-left: 15px;
+
+
+
+  height: 34px;
 
   ${props => props.transparent && `
     background: transparent;

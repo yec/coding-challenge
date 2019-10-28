@@ -16,7 +16,7 @@ function Page({ title = "", children = null }) {
   return (
     <Main>
       <SubHeader>
-        <Container >
+        <Container>
           {title}
         </Container>
       </SubHeader>
