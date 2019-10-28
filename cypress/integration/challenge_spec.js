@@ -32,4 +32,10 @@ describe('Navigation', function() {
     cy.contains('Popular Series').click();
     cy.url().should('include', '/popular-series')
   })
+
+  it('Handle not found', function() {
+    cy.visit('http://localhost:3000/asdf')
+    cy.contains('not found')
+    cy.contains('asdf')
+  })
 })
