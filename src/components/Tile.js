@@ -105,7 +105,11 @@ const ImgLoader = ({ imageUrl, children }) => {
     // cleanup
     return () => {
       // remove the tile
-      delete imgLoaderRefs[imageUrl];
+      // delete imgLoaderRef.current.imgRef
+      // delete imgLoaderRef
+      if (imageUrl) {
+        delete imgLoaderRefs[imageUrl];
+      }
     };
   },
     // only run useeffect imageUrl change

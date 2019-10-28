@@ -1,27 +1,30 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 function Stickyable({ className, children }) {
 
   var ele = useRef();
-  const [position, setPosition] = useState('relative');
+  const [position, setPosition] = useState('absolute');
 
-  // requestAnimationFrame(function setPositionHandler() {
-  //   window.scrollY > ele.current.parentElement.getBoundingClientRect().top ? setPosition('fixed') : setPosition('relative')
-  //   requestAnimationFrame(setPositionHandler);
-  // });
+  useEffect(function sticky() {
+    requestAnimationFrame(function setPositionHandler() {
+      window.scrollY > 60 ? setPosition('fixed') : setPosition('absolute')
+      requestAnimationFrame(setPositionHandler);
+    });
+  },
+  // run once
+  []);
 
-  return <div
+  return <div style={{height: 56}}><div
     ref={ele}
     style={position == 'fixed' ? {
       position,
       top: 0,
-      right: 0,
-      left: 0,
     } : {
-
+      position,
+      top: 60,
       }}
-    className={className}>{children}</div>
+    className={className}>{children}</div></div>
 }
 
 const SubHeader = styled(Stickyable)`
@@ -30,14 +33,14 @@ const SubHeader = styled(Stickyable)`
   font-size: 25px;
   text-shadow: 1px 1px 2px #666666;
 
-  // padding-top: 10px;
-  // padding-bottom: 10px;
+  z-index: 1;
+  right: 0;
+  left: 0;
 
   height: 56px;
   display:flex;
   align-items: center;
 
-  // justify-content: center;
   box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
 `;
 
