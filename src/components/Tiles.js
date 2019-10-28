@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Link } from 'react-router-dom';
-
 function Tiles ({ className, children}) {
   return <div className={className}>{children}</div>
 }

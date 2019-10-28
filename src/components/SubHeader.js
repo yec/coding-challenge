@@ -17,7 +17,7 @@ function Stickyable({ className, children }) {
 
   return <div style={{height: 56}}><div
     ref={ele}
-    style={position == 'fixed' ? {
+    style={position === 'fixed' ? {
       position,
       top: 0,
     } : {

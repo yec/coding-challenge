@@ -6,7 +6,6 @@ import { createLogOut, createLogIn } from "../actions/authenticationActions";
 
 import Header from '../components/Header';
 import Container from '../components/Container';
-import Text from '../components/Text';
 import Level from '../components/Level';
 import Button from '../components/Button';
 

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
@@ -36,7 +36,7 @@ function Tile({ title = "", titleCompact, url = "", children = "", images, ...pr
   }
 
   return <Card key={title} to={url}>
-    <ImgLoader imageUrl={images && images['Poster Art'].url}>{children}</ImgLoader>
+    <ImgLoader alt={title} imageUrl={images && images['Poster Art'].url}>{children}</ImgLoader>
     <Text cardTitle>{title}</Text>
   </Card>
 }
@@ -58,7 +58,7 @@ margin: 5px;
 transition: transform 0.2s;
 `
 
-const ImgLoader = ({ imageUrl, children }) => {
+const ImgLoader = ({ alt="", imageUrl, children }) => {
   const imgLoaderRef = useRef();
   const imgRef = useRef();
 
@@ -94,7 +94,7 @@ const ImgLoader = ({ imageUrl, children }) => {
     [imageUrl]);
 
   if (imageUrl) {
-    children = <img style={{ width: '100%', height: '100%' }} ref={imgRef} />;
+    children = <img alt={alt} style={{ width: '100%', height: '100%' }} ref={imgRef} />;
   }
   return <Img ref={imgLoaderRef} size='200%' imageUrl="assets/placeholder.png">{children}</Img>
 }

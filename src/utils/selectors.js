@@ -22,7 +22,7 @@ export function programTypeSelector(thisProgramType) {
     return entries
 
       // movies or series
-      .filter(({ programType }) => { return programType == thisProgramType; })
+      .filter(({ programType }) => { return programType === thisProgramType; })
 
       // releaseYear >= 2010
       .filter(({releaseYear}) => releaseYear >= 2010)
