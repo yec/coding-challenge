@@ -15,23 +15,19 @@ function Data({ selector, source }) {
   }
 
   if (entries.length > 0) {
-    return entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>);
+    return <Tiles>{entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>)}</Tiles>;
   } else {
-    return <Text>Ooops, something went wrong.</Text>
+    return <Text>Oops, something went wrong...</Text>
   }
 }
 
 export default function TileView({ items = [], ...props }) {
-
   return (
-    <Tiles>
-      {items.length > 0
-        ? items.map(item => <Tile key={item.title} {...item}></Tile>)
-        :
-        <Suspense fallback={<Text>Loading profile...</Text>}>
-          <Data {...props} />
-        </Suspense>}
-    </Tiles>
+    items.length > 0
+      ? <Tiles>{items.map(item => <Tile key={item.title} {...item}></Tile>)}</Tiles>
+      : <Suspense fallback={<Text>Loading profile...</Text>}>
+        <Data {...props} />
+      </Suspense>
   );
 }
 
