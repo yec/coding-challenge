@@ -13,8 +13,6 @@ const Header = styled.div`
   text-shadow: 1px 1px 2px rgba(0,0,0, 0.3);
 
   @media (min-width: 769px) {
-    // padding-left: 10px;
-    // padding-right: 10px;
     font-size: 33px;
     height: 60px;
   }

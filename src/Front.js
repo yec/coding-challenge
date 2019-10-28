@@ -17,7 +17,6 @@ import { programTypeSelector } from './utils/selectors';
 
 import './App.css';
 
-
 const seriesSelector = programTypeSelector('series');
 const moviesSelector = programTypeSelector('movie');
 

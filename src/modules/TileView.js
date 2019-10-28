@@ -7,8 +7,18 @@ import Text from '../components/Text';
 
 function Data({ selector, source }) {
   const serverResponse = useFetch(source, { method: 'GET' });
-  const entries = selector(serverResponse);
-  return entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>);
+  var entries = [];
+  try {
+    entries = selector(serverResponse);
+  } catch (e) {
+    console.log('server returned invalid response');
+  }
+
+  if (entries.length > 0) {
+    return entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>);
+  } else {
+    return <Text>Ooops, something went wrong.</Text>
+  }
 }
 
 export default function TileView({ items = [], ...props }) {
