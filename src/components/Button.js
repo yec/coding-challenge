@@ -2,14 +2,12 @@ import styled from 'styled-components';
 
 const Button = styled.button`
   color: white;
-  // font-weight: bold;
-  font-size: 16px
   border: none;
 
-  padding-right: 15px;
-  padding-left: 15px;
+  font-size: 12px
 
-
+  padding-right: 5px;
+  padding-left: 5px;
 
   height: 34px;
 
@@ -21,6 +19,15 @@ const Button = styled.button`
     background: linear-gradient(#555555, #333333, #555555);
     text-shadow: 1px 1px 2px #333333;
   `}
+  @media (min-width: 769px) {
+
+    font-size: 16px
+
+    padding-right: 15px;
+    padding-left: 15px;
+
+    height: 34px;
+  }
 `;
 
 export default Button;

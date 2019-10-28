@@ -30,7 +30,7 @@ function Stickyable({ className, children }) {
 const SubHeader = styled(Stickyable)`
   background: rgb(57, 57, 57);
   color: white;
-  font-size: 25px;
+  font-size: 20px;
   text-shadow: 1px 1px 2px #666666;
 
   z-index: 1;
@@ -42,6 +42,10 @@ const SubHeader = styled(Stickyable)`
   align-items: center;
 
   box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+
+  @media (min-width: 769px) {
+    font-size: 25px;
+  }
 `;
 
 export default SubHeader;

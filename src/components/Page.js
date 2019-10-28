@@ -16,12 +16,12 @@ function Page({ title = "", children = null }) {
   return (
     <Main>
       <SubHeader>
-        <Container>
+        <Container mobilePadding>
           {title}
         </Container>
       </SubHeader>
       <Section>
-        <Container medium>
+        <Container mobilePadding medium>
           {children}
         </Container>
       </Section>

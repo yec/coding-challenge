@@ -5,7 +5,7 @@ import Tile from '../components/Tile';
 import Tiles from '../components/Tiles';
 import Text from '../components/Text';
 
-function Data({ selector, source, component }) {
+function Data({ selector, source }) {
   const serverResponse = useFetch(source, { method: 'GET' });
   const entries = selector(serverResponse);
   return entries.map(entry => <Tile key={entry.title} url={entry.title} {...entry}></Tile>);

@@ -3,31 +3,7 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router-dom';
 
-const Text = styled.div`
-  display: flex;
-  flex: 1;
-
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  ${props => props.cardTitle && `
-    margin-top: 4px;
-    font-size: 14px;
-  `}
-  ${props => props.large && `
-    font-size: 24px;
-    font-weight: bold;
-    text-transform: uppercase;
-  `}
-  ${props => props.centered && `
-    justify-content: center;
-    align-items: center;
-  `}
-  ${props => props.white && `
-    color: white;
-  `}
-`;
+import Text from './Text';
 
 /**
  * Lazy load image implementation. add elements to an array and prevent image loading
@@ -70,14 +46,16 @@ const Card = styled(Link)`
 display: flex;
 flex-direction: column;
 width: 67px;
-// height: 120px;
 margin: 5px;
 
 @media (min-width: 769px) {
   width: 134px;
-  // height: 220px;
   margin: 10px;
 }
+&:hover {
+  transform: scale(1.05);
+}
+transition: transform 0.2s;
 `
 
 const ImgLoader = ({ imageUrl, children }) => {

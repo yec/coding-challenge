@@ -12,7 +12,7 @@ import Store from './Store';
 
 export default function GlobalFooter() {
   return <Footer>
-    <Container>
+    <Container mobilePadding>
       <Content>
         <FooterLinks />
         <Text grey small>Copyright (c) 2019 DEMO Streaming All Rights Reserved.</Text>

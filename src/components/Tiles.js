@@ -15,6 +15,7 @@ flex-flow: row wrap;
 margin-left: -5px;
 margin-top: -5px;
 margin-right: -5px;
+
 @media (min-width: 769px) {
   margin-left: -10px;
   margin-top: -10px;

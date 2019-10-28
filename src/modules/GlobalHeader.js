@@ -10,14 +10,14 @@ import Text from '../components/Text';
 import Level from '../components/Level';
 import Button from '../components/Button';
 
-function LoggedIn () {
+function LoggedIn() {
   const dispatch = useDispatch();
   return <React.Fragment>
     <Button transparent onClick={() => dispatch(createLogOut())}>Log out</Button>
   </React.Fragment>
 }
 
-function LoggedOut () {
+function LoggedOut() {
   const dispatch = useDispatch();
   return <React.Fragment>
     <Button transparent onClick={() => dispatch(createLogIn())}>Log in</Button>
@@ -32,15 +32,18 @@ export default function GlobalHeader() {
   }));
 
   return <Header>
-    <Container>
+    <Container mobilePadding>
       <Level mobile>
-      <Link to="/">DEMO Streaming</Link>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center'
+        <Link style={{
+          display: 'flex',
+          alignItems: 'center'
+        }} to="/">DEMO Streaming</Link>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center'
         }}>
-        { loggedIn ? <LoggedIn /> : <LoggedOut /> }
-      </div>
+          {loggedIn ? <LoggedIn /> : <LoggedOut />}
+        </div>
       </Level>
     </Container>
   </Header>

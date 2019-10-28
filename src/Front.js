@@ -8,20 +8,16 @@ import {
 } from "react-router-dom";
 import configureStore from './store/configureStore';
 
-
 import Page from './components/Page';
 
 import TileView from "./modules/TileView";
 import GlobalFooter from "./modules/GlobalFooter";
 import GlobalHeader from "./modules/GlobalHeader";
 
+import { programTypeSelector } from './utils/selectors';
+
 import './App.css';
 
-function programTypeSelector(thisProgramType) {
-  return ({ entries }) => {
-    return entries.filter(({ programType }) => { return programType == thisProgramType; });
-  };
-}
 
 const seriesSelector = programTypeSelector('series');
 const moviesSelector = programTypeSelector('movie');
