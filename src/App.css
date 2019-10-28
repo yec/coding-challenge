@@ -18,6 +18,9 @@ a:active {
 }
 
 .app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   animation: fadeInDownFromNone 0.5s ease-out;
 }
 
