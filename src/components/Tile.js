@@ -16,7 +16,7 @@ function checkVisible() {
   Object.values(imgLoaderRefs).forEach(ref => {
     if (
       ref.current.getBoundingClientRect().top < window.innerHeight
-      && ref.current.getBoundingClientRect().top > 0
+      && -ref.current.getBoundingClientRect().top < ref.current.getBoundingClientRect().height
     ) {
       // setting src triggers img element to start loading
       if (!ref.current.imgRef.current.src) {
