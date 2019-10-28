@@ -1,5 +1,5 @@
 
-function normalizeTitle(title) {
+function normalizeTitle(title = "") {
   return title.replace(/^(the|a) /i, '');
 }
 
