@@ -25,7 +25,7 @@ export default function TileView({ items = [], ...props }) {
   return (
     items.length > 0
       ? <Tiles>{items.map(item => <Tile key={item.title} {...item}></Tile>)}</Tiles>
-      : <Suspense fallback={<Text>Loading profile...</Text>}>
+      : <Suspense fallback={<Text>Loading...</Text>}>
           <Data {...props} />
         </Suspense>
   );
